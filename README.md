@@ -4,8 +4,9 @@
 
 This assignment asks you to implement concurrent matrix multiplication in Ada.
 
-The sections of the Lovelace Ada tutorial that you will find the most relevant 
-are:
+The sections of 
+[the Lovelace Ada tutorial](https://dwheeler.com/lovelace/master.htm) 
+that you will find the most relevant are:
 
 - Lesson 2 - Basic Ada Structure (Packages)
 - Lesson 13 - Tasks and Protected Types
