@@ -36,9 +36,9 @@ specification) the following:
 
 - A type (you can name it what you want) that defines the type of a matrix, 
   e.g. a two dimensional array of integers. The size of the array should be 
-  SIZExSIZE (i.e. a square matrix).
+  SIZExSIZE (i.e. **a square matrix**).
 
-- A procedure MatMult(A,B,C), where A and B are input parameters of the matrix 
+- A procedure `MatMult(A,B,C)`, where A and B are input parameters of the matrix 
   type you defined, and C is an output parameter, also of the same matrix type.
 
 Within the body of the MatrixMult package, you will define the MatMult procedure. 
@@ -52,27 +52,28 @@ algorithm.
 
 ### The AssignmentMain Procedure
 
-In a separate file (AssignmentMain.adb), you should define the procedure 
-AssignmentMain. It should declare three matrices of the type defined in the 
+In a separate file (`AssignmentMain.adb`), you should define the procedure 
+`AssignmentMain`. It should declare three matrices of the type defined in the 
 MatrixMult package, read in the values for the first two matrices, call MatMult 
 so that the third matrix contains the results of multiplying the first two, and 
 then print out the third matrix. It should accomplish this using at least three 
 tasks, as follows.
 
-- Reader1: This task should read in SIZE2 integers from the terminal and write 
+- `Reader1`: This task should read in SIZE2 integers from the terminal and write 
   them into the first matrix (in row major order -- i.e. going across the rows 
   of the matrix).
 
-- Reader2: This task should also read SIZE2 integers from the terminal and 
-  populate the second matrix in row major order. Be sure that Reader2 doesn't 
-  start reading until Reader1 has finished.
+- `Reader2`: This task should also read SIZE2 integers from the terminal and 
+  populate the second matrix in row major order. _**Be sure that Reader2 doesn't**_
+  _**start reading until Reader1 has finished**_.
 
-- Printer: This task should print the third matrix after it has been computed 
+- `Printer`: This task should print the third matrix after it has been computed 
   using MatMult. The printout should look reasonable.
 
-The actual call to the MatMult procedure should be from the body of the AssignmentMain procedure.
+The actual call to the MatMult procedure should be from the body of the 
+AssignmentMain procedure.
 
-In order to make it easy two read in the values for the two matrices, simply 
+In order to make it easy to read in the values for the two matrices, simply 
 create an input file containing the 200 integers, separated by spaces. Then, 
 when you run your program, redirect that file to the standard input by typing
 
