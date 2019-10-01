@@ -60,11 +60,11 @@ so that the third matrix contains the results of multiplying the first two, and
 then print out the third matrix. It should accomplish this using at least three 
 tasks, as follows.
 
-- `Reader1`: This task should read in SIZE2 integers from the terminal and write 
+- `Reader1`: This task should read in SIZE^2 integers from the terminal and write 
   them into the first matrix (in row major order -- i.e. going across the rows 
   of the matrix).
 
-- `Reader2`: This task should also read SIZE2 integers from the terminal and 
+- `Reader2`: This task should also read SIZE^2 integers from the terminal and 
   populate the second matrix in row major order. _**Be sure that Reader2 doesn't**_
   _**start reading until Reader1 has finished**_.
 
