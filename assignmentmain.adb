@@ -36,4 +36,36 @@ procedure AssignmentMain is
    			end select;
    		end loop;
    	end Matrix_Reader;
+
+   	task type Matrix_Printer is
+   		entry Print(M : in MatrixMult.Matrix);
+   	end Matrix_Printer;
+
+   	task body Matrix_Printer is
+   		Col, Row : INTEGER range 1 .. MatrixMult.SIZE := 1;
+   	begin
+   		loop
+   			select
+   				accept Print(M : in MatrixMult.Matrix) do
+   					Col := 1;
+   					Row := 1;
+   					while Row <= MatrixMult.SIZE loop
+   						Put(M(Row, Col));
+						if Col < MatrixMult.SIZE then
+							Col := Col + 1;
+						else
+							New_Line;
+							Col := 1;
+							if Row + 1 > MatrixMult.SIZE then
+								exit;
+							end if;
+							Row := Row + 1;
+						end if;
+   					end loop;
+   				end Print;
+   			or
+   				terminate;
+   			end select;
+   		end loop;
+   	end Matrix_Printer;
 end AssignmentMain;
