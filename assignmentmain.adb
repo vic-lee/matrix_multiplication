@@ -68,4 +68,17 @@ procedure AssignmentMain is
    			end select;
    		end loop;
    	end Matrix_Printer;
+
+   	Reader1, Reader2 : Matrix_Reader;
+   	Printer : Matrix_Printer;
+
+   	A, B, C : MatrixMult.Matrix := (others => (others => 0));
+
+begin
+	Reader1.Start_Reading_Matrix(A);
+	Reader2.Start_Reading_Matrix(B);
+
+	MatMult(A, B, C);
+
+	Printer.Print(C);
 end AssignmentMain;
