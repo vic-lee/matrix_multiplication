@@ -7,42 +7,46 @@ use  Ada.Integer_Text_IO;
 
 package body MatrixMult is
 
-	task type Mult_Worker is
-		entry Mult_Cell(A     : in Matrix;
-						B     : in Matrix;
-						A_Row : in INTEGER;
-						B_Col : in INTEGER;
-						Ans   : out INTEGER);
-	end Mult_Worker;
-
-	task body Mult_Worker is
-		Sum : INTEGER := 0;
-	begin
-		loop
-			select
-				accept Mult_Cell(A     : in Matrix;
-								 B     : in Matrix;
-								 A_Row : in INTEGER;
-								 B_Col : in INTEGER;
-								 Ans   : out INTEGER) do
-				    for Index in 1 .. SIZE loop
-						Sum := Sum + A(A_Row, Index) * B(Index, B_Col);
-					end loop;
-					Ans := Sum;
-				end Mult_Cell;
-				or
-					terminate;
-			end select;
-		end loop;
-	end Mult_Worker;
-
-	Workers : array(1 .. SIZE, 1 .. SIZE) of Mult_Worker;
-
 	procedure MatMult(A: in Matrix; B: in Matrix; C: out Matrix) is
+
+		task type Mult_Worker is
+			entry Mult_Cell(A_Row : in INTEGER;
+							B_Col : in INTEGER);
+			entry Completed(Ans : out INTEGER);
+		end Mult_Worker;
+
+		task body Mult_Worker is
+			Sum 	: INTEGER := 0;
+			Row 	: INTEGER;
+			Col 	: INTEGER;
+		begin
+			accept Mult_Cell(A_Row : in INTEGER;
+							 B_Col : in INTEGER) do
+				Row := A_Row;
+				Col := B_Col;
+			end Mult_Cell;
+
+			for Index in 1 .. SIZE loop
+				Sum := Sum + A(Row, Index) * B(Index, Col);
+			end loop;
+
+			accept Completed(Ans : out INTEGER) do
+				Ans := Sum;
+			end Completed;
+		end Mult_Worker;
+
+		Workers : array(1 .. SIZE, 1 .. SIZE) of Mult_Worker;
+
 	begin
 		for Row in 1 .. SIZE loop
 			for Col in 1 .. SIZE loop
-				Workers(Row, Col).Mult_Cell(A, B, Row, Col, C(Row, Col));
+				Workers(Row, Col).Mult_Cell(Row, Col);
+			end loop;
+		end loop;
+
+		for Row in 1 .. SIZE loop
+			for Col in 1 .. SIZE loop
+				Workers(Row, Col).Completed(C(Row, Col));
 			end loop;
 		end loop;
 	end MatMult;
