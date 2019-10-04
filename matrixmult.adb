@@ -16,7 +16,7 @@ package body MatrixMult is
 	end Mult_Worker;
 
 	task body Mult_Worker is
-		Cum : INTEGER := 0;
+		Sum : INTEGER := 0;
 	begin
 		loop
 			select
@@ -26,9 +26,9 @@ package body MatrixMult is
 								 B_Col : in INTEGER;
 								 Ans   : out INTEGER) do
 				    for Index in 1 .. SIZE loop
-						Cum := Cum + A(A_Row, Index) * B(Index, B_Col);
+						Sum := Sum + A(A_Row, Index) * B(Index, B_Col);
 					end loop;
-					Ans := Cum;
+					Ans := Sum;
 				end Mult_Cell;
 				or
 					terminate;
